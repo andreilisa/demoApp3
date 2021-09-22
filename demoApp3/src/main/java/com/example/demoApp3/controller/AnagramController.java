@@ -40,7 +40,11 @@ public class AnagramController {
             if (main.exists() && main.isDirectory()) {
                 File[] arr = main.listFiles();
                 recursiveShowFile(arr, 0, 0);
-                for (File file : arr) anagramMapper.write(new File(file.getPath()));
+                for (File file : arr) {
+                    if (file.getName().startsWith(prefix))
+                    anagramMapper.write(new File(file.getPath()));
+
+                }
             }
             Cursor<String> anagrams = anagramMapper.showAll();
             for (String anagram : anagrams) {
