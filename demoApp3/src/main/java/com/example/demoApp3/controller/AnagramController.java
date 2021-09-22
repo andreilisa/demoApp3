@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -30,8 +31,6 @@ import java.util.TreeSet;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnagramController {
-    @Autowired
-    AnagramMapper anagramMapper;
 
     @Value("${file-reader}")
     String pathFile;
@@ -46,22 +45,17 @@ public class AnagramController {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         SqlSession session = sqlSessionFactory.openSession();
         {
-
-            anagramMapper = session.getMapper(AnagramMapper.class);
-
+            AnagramMapper anagramMapper = session.getMapper(AnagramMapper.class);
             anagramMapper.createFunction();
-
             anagramMapper.createTable();
-
             File dir = new File(pathFile);
             File[] matches = dir.listFiles((dir1, name) -> name.startsWith(prefix));
             for (int i = 0; i < matches.length; i++)
                 anagramMapper.write(matches[i].getPath());
 
-            AnagramMapper anagramsMapper = session.getMapper(AnagramMapper.class);
-            Cursor<String> anagrams = anagramsMapper.showAll();
+            Cursor<String> anagrams = anagramMapper.showAll();
             for (String anagram : anagrams) {
-                TreeSet<String> anagramsByValue = anagramsMapper.anagrams(anagram);
+                TreeSet<String> anagramsByValue = anagramMapper.anagrams(anagram);
                 if (anagramsByValue.size() > 1) {
                     log.info(anagramsByValue.toString().replaceAll("\\[", " ")
                             .replaceAll(",", " ")
