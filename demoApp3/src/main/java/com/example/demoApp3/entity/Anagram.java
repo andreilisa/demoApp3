@@ -6,13 +6,12 @@ import lombok.*;
 @Data
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Anagram {
 
-    private final String word;
-
-    public Anagram(String word, String wordSort) {
-        this.word = word;
-    }
+    private String word;
+    private  String wordSort;
 
     @Override
     public String toString() {

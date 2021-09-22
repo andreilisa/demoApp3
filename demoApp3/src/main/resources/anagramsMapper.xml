@@ -35,9 +35,9 @@
         ) ) STORED
             );
     </select>
-    <select id="write" resultType="java.lang.String">
+    <insert id="write">
         COPY table_test(word) FROM '${path}'
-    </select>
+    </insert>
     <select id="anagrams" resultType="java.lang.String">
         SELECT word
         FROM table_test
