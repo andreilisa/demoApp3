@@ -46,8 +46,8 @@ public class AnagramController {
         SqlSession session = sqlSessionFactory.openSession();
         {
             AnagramMapper anagramMapper = session.getMapper(AnagramMapper.class);
-            anagramMapper.createFunction();
-            anagramMapper.createTable();
+//            anagramMapper.createFunction();
+//            anagramMapper.createTable();
             File dir = new File(pathFile);
             File[] matches = dir.listFiles((dir1, name) -> name.startsWith(prefix));
             for (int i = 0; i < matches.length; i++)

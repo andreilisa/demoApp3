@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demoApp3.Mapper.AnagramMapper">
 
-    <select id="showAll" fetchSize="500" resultType="java.lang.String">
+    <select id="showAll" fetchSize="300" resultType="java.lang.String">
         SELECT wordsort
         FROM table_test
         GROUP BY wordSort;
