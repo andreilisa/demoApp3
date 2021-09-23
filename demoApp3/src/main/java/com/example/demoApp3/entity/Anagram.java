@@ -1,6 +1,5 @@
 package com.example.demoApp3.entity;
 
-
 import lombok.*;
 
 @Data
@@ -15,9 +14,7 @@ public class Anagram {
 
     @Override
     public String toString() {
-        return
-                "" +
-                        word;
+        return word;
     }
 
 }

@@ -1,7 +1,6 @@
-package com.example.demoApp3.controller;
+package com.example.demoApp3.Service;
 
 import com.example.demoApp3.Mapper.AnagramMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,12 +12,12 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Objects;
 import java.util.TreeSet;
 
 
-@Slf4j
 @Service
-public class AnagramController {
+public class AnagramService {
 
     @Value("${file-reader}")
     String pathFile;
@@ -26,10 +25,14 @@ public class AnagramController {
     @Value("${file-name}")
     String prefix;
 
-//    @EventListener(ApplicationReadyEvent.class)
-//    @RequestMapping(value = "/getAnagrams", method = RequestMethod.GET)
-    public void anagramController() throws IOException {
-        Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+
+    public void showAnagram() {
+        Reader reader = null;
+        try {
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         SqlSession session = sqlSessionFactory.openSession();
         {
@@ -39,11 +42,14 @@ public class AnagramController {
             File main = new File(pathFile);
             if (main.exists() && main.isDirectory()) {
                 File[] arr = main.listFiles();
-                recursiveShowFile(arr, 0, 0);
-                for (File file : arr) {
-                    if (file.getName().startsWith(prefix))
-                    anagramMapper.write(new File(file.getPath()));
-
+                if (arr != null) {
+                    recursiveShowFile(arr, 0, 0);
+                }
+                if (arr != null) {
+                    for (File file : arr) {
+                        if (file.getName().startsWith(prefix))
+                            anagramMapper.write(new File(file.getPath()));
+                    }
                 }
             }
             Cursor<String> anagrams = anagramMapper.showAll();
@@ -53,7 +59,7 @@ public class AnagramController {
                     System.out.println((anagramsByValue.toString().replaceAll("\\[", " ")
                             .replaceAll(",", " ")
                             .replaceAll("]", " ").replaceAll("\\{", " ")
-                            .replaceAll("\\}", " ")));
+                            .replaceAll("}", " ")));
                 }
             }
         }
@@ -71,11 +77,9 @@ public class AnagramController {
 
             else if (arr[index].isDirectory()) {
 
-                recursiveShowFile(arr[index].listFiles(), 0, level + 1);
+                recursiveShowFile(Objects.requireNonNull(arr[index].listFiles()), 0, level + 1);
             }
 
         recursiveShowFile(arr, ++index, level);
     }
 }
-
-

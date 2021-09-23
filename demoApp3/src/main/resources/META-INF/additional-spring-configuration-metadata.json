@@ -4,5 +4,10 @@
       "name": "mypath",
       "type": "java.lang.String",
       "description": "Description for mypath."
-  }
-] }
+    },
+    {
+      "name": "file-reader",
+      "type": "java.lang.String",
+      "description": "Description for file-reader."
+    }
+  ] }
