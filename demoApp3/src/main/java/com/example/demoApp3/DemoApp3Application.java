@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.IOException;
+
 
 @MapperScan("com.example.demoApp3.Mapper")
 @SpringBootApplication
@@ -22,7 +24,7 @@ public class DemoApp3Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args){
+    public void run(String... args) throws IOException {
         anagram.showAnagram();
 
     }
