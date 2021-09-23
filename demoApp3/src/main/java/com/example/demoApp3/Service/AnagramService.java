@@ -72,9 +72,11 @@ public class AnagramService {
         for (int i = 0; i < level; i++)
             System.out.print("\t");
 
-        if (arr[index].isFile())
-            if (arr[index].getName().startsWith(prefix)) ;
-
+        if (arr[index].isFile()) {
+            if (arr[index].getName().startsWith(prefix)) {
+                System.out.println(arr[index].getName());
+            }
+        }
             else if (arr[index].isDirectory()) {
 
                 recursiveShowFile(Objects.requireNonNull(arr[index].listFiles()), 0, level + 1);
