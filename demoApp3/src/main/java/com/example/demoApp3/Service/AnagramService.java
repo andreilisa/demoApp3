@@ -26,19 +26,28 @@ public class AnagramService {
     String prefix;
 
 
-    public void showAnagram() throws IOException {
+    public AnagramMapper openSession() throws IOException {
         Reader reader;
 
         reader = Resources.getResourceAsReader("mybatis-config.xml");
 
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         SqlSession session = sqlSessionFactory.openSession();
+        return session.getMapper(AnagramMapper.class);
 
-        AnagramMapper anagramMapper = session.getMapper(AnagramMapper.class);
+    }
+
+    public void createTableAndFunction() throws IOException {
+
+        AnagramMapper anagramMapper = openSession();
 
         anagramMapper.createFunction();
         anagramMapper.createTable();
+    }
 
+    public void writeAndShow() throws IOException {
+
+        AnagramMapper anagramMapper = openSession();
         File main = new File(pathFile);
 
         if (main.exists() && main.isDirectory()) {
@@ -49,18 +58,14 @@ public class AnagramService {
             if (arr != null) {
                 for (File file : arr) {
                     if (file.getName().startsWith(prefix))
-                        anagramMapper.write(new File(file.getPath()));
+                        anagramMapper.write(new File(String.valueOf(file)));
                 }
             }
         }
         Cursor<String> anagrams = anagramMapper.showAll();
-
         for (String anagram : anagrams) {
-
             TreeSet<String> anagramsByValue = anagramMapper.anagrams(anagram);
-
             if (anagramsByValue.size() > 1) {
-
                 System.out.println((anagramsByValue.toString().replaceAll("\\[", " ")
                         .replaceAll(",", " ")
                         .replaceAll("]", " ").replaceAll("\\{", " ")
@@ -68,7 +73,6 @@ public class AnagramService {
             }
         }
     }
-
 
     private void recursiveShowFile(File[] arr, int index, int level) {
         if (index == arr.length)

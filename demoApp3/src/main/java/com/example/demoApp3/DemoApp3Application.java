@@ -25,7 +25,9 @@ public class DemoApp3Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
-        anagram.showAnagram();
+        anagram.openSession();
+        anagram.createTableAndFunction();
+        anagram.writeAndShow();
 
     }
 }
