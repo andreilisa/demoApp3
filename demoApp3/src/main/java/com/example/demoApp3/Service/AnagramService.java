@@ -43,26 +43,19 @@ public class AnagramService {
                 int count = stringArray.length;
 
                 for (int i = 0; i < count; i++) {
-
-                    if (stringArray[i].equals("[")) {
-
-                        stringArray[i] = " ";
-                    } else if (stringArray[i].equals("]")) {
-
-                        stringArray[i] = " ";
-                    } else if (stringArray[i].equals(",")) {
-
-                        stringArray[i] = " ";
+                    switch (stringArray[i]) {
+                        case "[":
+                        case "]":
+                        case ",":
+                            stringArray[i] = " ";
+                            break;
                     }
-
                     newString.append(stringArray[i]);
-
                 }
                 System.out.println(newString);
             }
         }
     }
-
 
     public File[] showFile(File path) {
         if (path.isFile()) {
