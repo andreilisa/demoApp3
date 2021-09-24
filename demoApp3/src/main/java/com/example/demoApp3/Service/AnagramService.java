@@ -1,12 +1,10 @@
 package com.example.demoApp3.Service;
 
 import com.example.demoApp3.Mapper.AnagramMapper;
-import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.io.File;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -29,18 +27,11 @@ public class AnagramService {
 
         File main = new File(pathFile);
 
-        if (main.exists() && main.isDirectory()) {
-            File[] arr = main.listFiles();
-            if (arr != null) {
-                displayAll(main);
-            }
-            if (arr != null) {
-                for (File file : arr) {
-                    if (file.getName().startsWith(prefix))
-                        anagramMapper.write(file.getPath());
-                }
-            }
+        for (File file: showFile(main)){
+            if (file.getName().startsWith(prefix))
+        anagramMapper.write(file.getPath());
         }
+
         Set<String> anagrams = anagramMapper.showAll();
         for (String anagram : anagrams) {
             TreeSet<String> anagramsByValue = anagramMapper.anagrams(anagram);
@@ -55,16 +46,17 @@ public class AnagramService {
         }
     }
 
-    public static void displayAll(File path) {
+    public File[] showFile(File path) {
         if (path.isFile()) {
-            if (path.getName().startsWith("A-"))
-                System.out.println(path.getName());
-        } else {
-            System.out.println(path.getName());
-            File files[] = path.listFiles();
-            for (File dirOrFile : files) {
-                displayAll(dirOrFile);
-            }
+            if (path.getPath().startsWith(prefix))
+            System.out.println(path.getPath());
         }
+            File[] files = path.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    showFile(f);
+                }
+            }
+        return files;
     }
-}
+   }
