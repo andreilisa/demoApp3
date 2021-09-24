@@ -32,18 +32,37 @@ public class AnagramService {
             if (file.getName().startsWith(prefix))
                 anagramMapper.write(file.getPath());
         }
-
         Set<String> anagrams = anagramMapper.showAll();
         for (String anagram : anagrams) {
             TreeSet<String> anagramsByValue = anagramMapper.anagrams(anagram);
             if (anagramsByValue.size() > 1) {
-                System.out.println((anagramsByValue.toString()
-                        .replaceAll("\\[", " ")
-                        .replaceAll(",", " ")
-                        .replaceAll("]", " ")));
+                String[] stringArray = anagramsByValue.toString().split("");
+
+                StringBuilder newString = new StringBuilder();
+
+                int count = stringArray.length;
+
+                for (int i = 0; i < count; i++) {
+
+                    if (stringArray[i].equalsIgnoreCase("[")) {
+
+                        stringArray[i] = " ";
+                    } else if (stringArray[i].equalsIgnoreCase("]")) {
+
+                        stringArray[i] = " ";
+                    } else if (stringArray[i].equalsIgnoreCase(",")) {
+
+                        stringArray[i] = " ";
+                    }
+
+                    newString.append(stringArray[i]);
+
+                }
+                System.out.println(newString);
             }
         }
     }
+
 
     public File[] showFile(File path) {
         if (path.isFile()) {
