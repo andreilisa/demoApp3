@@ -49,8 +49,8 @@ public class AnagramService {
 
     public File[] showFile(File path) {
         if (path.isFile()) {
-            if (path.getPath().startsWith(prefix))
-                System.out.println(path.getPath());
+            if (path.getName().startsWith(prefix))
+                System.out.println(path.getName());
         }
         File[] files = path.listFiles();
         if (files != null) {
