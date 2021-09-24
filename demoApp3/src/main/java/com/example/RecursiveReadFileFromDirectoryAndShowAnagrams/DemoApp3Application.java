@@ -1,6 +1,6 @@
-package com.example.demoApp3;
+package com.example.RecursiveReadFileFromDirectoryAndShowAnagrams;
 
-import com.example.demoApp3.service.AnagramService;
+import com.example.RecursiveReadFileFromDirectoryAndShowAnagrams.service.AnagramService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;

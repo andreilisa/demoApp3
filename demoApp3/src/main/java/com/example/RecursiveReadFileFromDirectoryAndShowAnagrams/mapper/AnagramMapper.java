@@ -1,4 +1,4 @@
-package com.example.demoApp3.mapper;
+package com.example.RecursiveReadFileFromDirectoryAndShowAnagrams.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
