@@ -3,13 +3,13 @@ package com.example.demoApp3.Mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.cursor.Cursor;
 
-import java.io.File;
+import java.util.Set;
 import java.util.TreeSet;
 
 @Mapper
 public interface AnagramMapper {
 
-    Cursor<String> showAll();
+    Set<String> showAll();
 
     TreeSet<String> anagrams(String value);
 
@@ -17,6 +17,5 @@ public interface AnagramMapper {
 
     void createTable();
 
-    void write(File path);
-
+    void write(String path);
 }

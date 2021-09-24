@@ -2,17 +2,12 @@ package com.example.demoApp3.Service;
 
 import com.example.demoApp3.Mapper.AnagramMapper;
 import org.apache.ibatis.cursor.Cursor;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeSet;
 
 
@@ -25,29 +20,13 @@ public class AnagramService {
     @Value("${file-name}")
     String prefix;
 
+    @Autowired
+    private AnagramMapper anagramMapper;
 
-    public AnagramMapper openSession() throws IOException {
-        Reader reader;
-
-        reader = Resources.getResourceAsReader("mybatis-config.xml");
-
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        SqlSession session = sqlSessionFactory.openSession();
-        return session.getMapper(AnagramMapper.class);
-
-    }
-
-    public void createTableAndFunction() throws IOException {
-
-        AnagramMapper anagramMapper = openSession();
-
+    public void writeAndShow() {
         anagramMapper.createFunction();
         anagramMapper.createTable();
-    }
 
-    public void writeAndShow() throws IOException {
-
-        AnagramMapper anagramMapper = openSession();
         File main = new File(pathFile);
 
         if (main.exists() && main.isDirectory()) {
@@ -58,17 +37,19 @@ public class AnagramService {
             if (arr != null) {
                 for (File file : arr) {
                     if (file.getName().startsWith(prefix))
-                        anagramMapper.write(new File(String.valueOf(file)));
+                        anagramMapper.write(file.getPath());
                 }
             }
         }
-        Cursor<String> anagrams = anagramMapper.showAll();
+        Set<String> anagrams = anagramMapper.showAll();
         for (String anagram : anagrams) {
             TreeSet<String> anagramsByValue = anagramMapper.anagrams(anagram);
             if (anagramsByValue.size() > 1) {
-                System.out.println((anagramsByValue.toString().replaceAll("\\[", " ")
+                System.out.println((anagramsByValue.toString()
+                        .replaceAll("\\[", " ")
                         .replaceAll(",", " ")
-                        .replaceAll("]", " ").replaceAll("\\{", " ")
+                        .replaceAll("]", " ")
+                        .replaceAll("\\{", " ")
                         .replaceAll("}", " ")));
             }
         }

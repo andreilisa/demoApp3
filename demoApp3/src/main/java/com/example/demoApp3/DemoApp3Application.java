@@ -1,7 +1,9 @@
 package com.example.demoApp3;
+
 import com.example.demoApp3.Service.AnagramService;
 import lombok.AllArgsConstructor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +17,7 @@ import java.io.IOException;
 @AllArgsConstructor
 public class DemoApp3Application implements CommandLineRunner {
 
+    @Autowired
     AnagramService anagram;
 
     public static void main(String[] args) {
@@ -24,11 +27,7 @@ public class DemoApp3Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws IOException {
-        anagram.openSession();
-        anagram.createTableAndFunction();
+    public void run(String... args){
         anagram.writeAndShow();
-
     }
 }
-

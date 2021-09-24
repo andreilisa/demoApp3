@@ -37,6 +37,7 @@
     </select>
     <insert id="write">
         COPY table_test(word) FROM '${path}'
+
     </insert>
     <select id="anagrams" resultType="java.lang.String" fetchSize="300">
         SELECT word
