@@ -1,4 +1,4 @@
-package com.example.RecursiveReadFileFromDirectoryAndShowAnagrams;
+package com.example.recursiveReadFileFromDirectoryAndShowAnagrams;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
