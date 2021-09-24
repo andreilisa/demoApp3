@@ -9,12 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-
-
 @MapperScan("com.example.demoApp3.Mapper")
 @SpringBootApplication
-@AllArgsConstructor
 public class DemoApp3Application implements CommandLineRunner {
 
     @Autowired

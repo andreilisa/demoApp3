@@ -1,7 +1,6 @@
 package com.example.demoApp3.Mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.cursor.Cursor;
 
 import java.util.Set;
 import java.util.TreeSet;
