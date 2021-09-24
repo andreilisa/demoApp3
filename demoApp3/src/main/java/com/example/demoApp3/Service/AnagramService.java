@@ -4,6 +4,7 @@ import com.example.demoApp3.Mapper.AnagramMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.util.Set;
 import java.util.TreeSet;
@@ -27,9 +28,9 @@ public class AnagramService {
 
         File main = new File(pathFile);
 
-        for (File file: showFile(main)){
+        for (File file : showFile(main)) {
             if (file.getName().startsWith(prefix))
-        anagramMapper.write(file.getPath());
+                anagramMapper.write(file.getPath());
         }
 
         Set<String> anagrams = anagramMapper.showAll();
@@ -49,14 +50,14 @@ public class AnagramService {
     public File[] showFile(File path) {
         if (path.isFile()) {
             if (path.getPath().startsWith(prefix))
-            System.out.println(path.getPath());
+                System.out.println(path.getPath());
         }
-            File[] files = path.listFiles();
-            if (files != null) {
-                for (File f : files) {
-                    showFile(f);
-                }
+        File[] files = path.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                showFile(f);
             }
+        }
         return files;
     }
-   }
+}
