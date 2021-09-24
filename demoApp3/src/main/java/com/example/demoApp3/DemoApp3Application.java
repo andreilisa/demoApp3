@@ -1,7 +1,6 @@
 package com.example.demoApp3;
 
-import com.example.demoApp3.Service.AnagramService;
-import lombok.AllArgsConstructor;
+import com.example.demoApp3.service.AnagramService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -24,6 +23,7 @@ public class DemoApp3Application implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-        anagram.writeAndShow();
+        anagram.write();
+        anagram.displayAnagram();
     }
 }
