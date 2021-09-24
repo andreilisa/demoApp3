@@ -44,13 +44,13 @@ public class AnagramService {
 
                 for (int i = 0; i < count; i++) {
 
-                    if (stringArray[i].equalsIgnoreCase("[")) {
+                    if (stringArray[i].equals("[")) {
 
                         stringArray[i] = " ";
-                    } else if (stringArray[i].equalsIgnoreCase("]")) {
+                    } else if (stringArray[i].equals("]")) {
 
                         stringArray[i] = " ";
-                    } else if (stringArray[i].equalsIgnoreCase(",")) {
+                    } else if (stringArray[i].equals(",")) {
 
                         stringArray[i] = " ";
                     }
