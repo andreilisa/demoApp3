@@ -40,9 +40,7 @@ public class AnagramService {
                 System.out.println((anagramsByValue.toString()
                         .replaceAll("\\[", " ")
                         .replaceAll(",", " ")
-                        .replaceAll("]", " ")
-                        .replaceAll("\\{", " ")
-                        .replaceAll("}", " ")));
+                        .replaceAll("]", " ")));
             }
         }
     }
