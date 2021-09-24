@@ -32,7 +32,7 @@ public class AnagramService {
         if (main.exists() && main.isDirectory()) {
             File[] arr = main.listFiles();
             if (arr != null) {
-                recursiveShowFile(arr, 0, 0);
+                displayAll(main);
             }
             if (arr != null) {
                 for (File file : arr) {
@@ -55,24 +55,16 @@ public class AnagramService {
         }
     }
 
-    private void recursiveShowFile(File[] arr, int index, int level) {
-        if (index == arr.length)
-            return;
-
-        for (int i = 0; i < level; i++)
-            System.out.print("\t");
-
-        if (arr[index].isFile()) {
-
-            if (arr[index].getName().startsWith(prefix)) {
-
-                System.out.println(arr[index].getName());
+    public static void displayAll(File path) {
+        if (path.isFile()) {
+            if (path.getName().startsWith("A-"))
+                System.out.println(path.getName());
+        } else {
+            System.out.println(path.getName());
+            File files[] = path.listFiles();
+            for (File dirOrFile : files) {
+                displayAll(dirOrFile);
             }
-        } else if (arr[index].isDirectory()) {
-
-            recursiveShowFile(Objects.requireNonNull(arr[index].listFiles()), 0, level + 1);
         }
-
-        recursiveShowFile(arr, ++index, level);
     }
 }
