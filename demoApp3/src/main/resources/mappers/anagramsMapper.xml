@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.recursiveReadFileFromDirectoryAndShowAnagrams.mapper.AnagramMapper">
+<mapper namespace="com.example.demoApp3.mapper.AnagramMapper">
 
     <select id="showAll" fetchSize="300" resultType="java.lang.String">
         SELECT wordsort

@@ -1,6 +1,6 @@
-package com.example.recursiveReadFileFromDirectoryAndShowAnagrams.service;
+package com.example.demoApp3.service;
 
-import com.example.recursiveReadFileFromDirectoryAndShowAnagrams.mapper.AnagramMapper;
+import com.example.demoApp3.mapper.AnagramMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
